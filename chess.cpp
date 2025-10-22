@@ -55,18 +55,17 @@ class ChessGUI {
 
         }
 
-        void run() { 
-            while (window.isOpen()) { 
-                handleEvents(); 
-                render();
-            }
-        }
+       void run() {
+    while (window.isOpen()) {
+        handleEvents();
+        render();
+    }
+}
 
-        private:
-        void handleEvents()  {
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed) {
+private:
+    void handleEvents() {
+        while (auto event = window.pollEvent()) {
+            if (event->is<sf::Event::Closed>()) {
                 window.close();
             }
         }
@@ -82,7 +81,7 @@ class ChessGUI {
         for (int row = 0; row < BOARD_SIZE; row++) {
             for (int col = 0; col < BOARD_SIZE; col++) {
                 sf::RectangleShape square(sf::Vector2f(SQUARE_SIZE, SQUARE_SIZE));
-                square.setPosition(col * SQUARE_SIZE, row * SQUARE_SIZE);
+                square.setPosition(sf::Vector2f(col * SQUARE_SIZE, row * SQUARE_SIZE));
                 
                 if ((row + col) % 2 == 0) {
                     square.setFillColor(lightSquare);
