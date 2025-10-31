@@ -38,20 +38,13 @@ class ChessGUI {
     sf::RenderWindow window; 
     sf::Font font; 
 
-    sf::Color lightSquare; 
-    sf::Color darkSquare; 
-    
-    bool pieceSelected; 
-    int selectedRow; 
-    int selectedCol; 
+    sf::Color lightSquare;
+    sf::Color darkSquare;
 
     public:
         ChessGUI() : window(sf::VideoMode({WINDOW_SIZE, WINDOW_SIZE}), "Chess Game"),
         lightSquare(240, 217, 181),
-        darkSquare(181, 136, 99),
-        pieceSelected(false),
-        selectedRow(-1),
-        selectedCol(-1) {
+        darkSquare(181, 136, 99) {
 
         }
 
