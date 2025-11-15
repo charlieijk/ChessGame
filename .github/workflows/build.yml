@@ -29,7 +29,10 @@ jobs:
         sudo cmake --install build
 
     - name: Build chess game
-      run: make
+      run: |
+        export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+        export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
+        make
 
     - name: Check executable
       run: |

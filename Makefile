@@ -7,7 +7,7 @@ TARGET = chess
 SOURCE = chess.cpp
 
 # Detect SFML installation path
-SFML_PREFIX := $(shell if [ -d "/opt/homebrew/opt/sfml" ]; then echo "/opt/homebrew/opt/sfml"; elif [ -d "/usr/local/opt/sfml" ]; then echo "/usr/local/opt/sfml"; fi)
+SFML_PREFIX := $(shell if [ -d "/opt/homebrew/opt/sfml" ]; then echo "/opt/homebrew/opt/sfml"; elif [ -d "/usr/local/opt/sfml" ]; then echo "/usr/local/opt/sfml"; elif [ -d "/usr/local/include/SFML" ]; then echo "/usr/local"; fi)
 
 # SFML library flags
 ifneq ($(SFML_PREFIX),)
