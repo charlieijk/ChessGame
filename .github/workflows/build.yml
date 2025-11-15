@@ -17,7 +17,16 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y g++ make libsfml-dev
+        sudo apt-get install -y g++ make cmake libxrandr-dev libxcursor-dev libudev-dev libfreetype-dev libopenal-dev libflac-dev libvorbis-dev libgl1-mesa-dev libegl1-mesa-dev
+
+    - name: Build and install SFML 3.0
+      run: |
+        git clone https://github.com/SFML/SFML.git
+        cd SFML
+        git checkout 3.0.0
+        cmake -B build -DCMAKE_BUILD_TYPE=Release
+        cmake --build build
+        sudo cmake --install build
 
     - name: Build chess game
       run: make
