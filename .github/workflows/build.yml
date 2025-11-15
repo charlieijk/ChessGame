@@ -24,17 +24,19 @@ jobs:
         git clone https://github.com/SFML/SFML.git
         cd SFML
         git checkout 3.0.0
-        cmake -B build -DCMAKE_BUILD_TYPE=Release
-        cmake --build build
+        cmake -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON
+        cmake --build build -j$(nproc)
         sudo cmake --install build
+        sudo ldconfig
 
     - name: Verify SFML installation
       run: |
         echo "Checking for SFML libraries..."
-        find /usr -name "libsfml*.so*" 2>/dev/null || true
-        find /usr/local -name "libsfml*.so*" 2>/dev/null || true
-        ls -la /usr/local/lib/ || true
-        ldconfig -p | grep sfml || true
+        find /usr -name "*sfml*" 2>/dev/null | head -20 || true
+        echo "Contents of /usr/local/lib:"
+        ls -la /usr/local/lib/ 2>/dev/null | grep -i sfml || echo "No SFML files found"
+        echo "Checking ldconfig cache:"
+        ldconfig -p | grep -i sfml || echo "No SFML in ldconfig"
 
     - name: Build chess game
       run: |
