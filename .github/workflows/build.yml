@@ -28,8 +28,17 @@ jobs:
         cmake --build build
         sudo cmake --install build
 
+    - name: Verify SFML installation
+      run: |
+        echo "Checking for SFML libraries..."
+        find /usr -name "libsfml*.so*" 2>/dev/null || true
+        find /usr/local -name "libsfml*.so*" 2>/dev/null || true
+        ls -la /usr/local/lib/ || true
+        ldconfig -p | grep sfml || true
+
     - name: Build chess game
       run: |
+        sudo ldconfig
         export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
         export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
         make
